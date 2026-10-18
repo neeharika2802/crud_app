@@ -1,0 +1,66 @@
+body{
+   font-family:sans-serif;
+   margin:0;
+}
+header{
+   /* background-color: hsl(120, 100%, 75%); */
+   background-color: hsl(204, 43%, 83%);
+}
+header{
+   display: flex;
+   align-items: center;
+   padding:5px;
+}
+header #heading{
+   font-size: xx-small;
+   margin-left: 30px;
+}
+header #searchbar{
+   margin: 0 auto;
+}
+#searchbar input{
+   padding: 8px 30px;
+}
+#below{
+   display: flex;
+}
+nav {
+    width: 200px;
+    border-right: 5px solid #ccc; /*adds a solid line*/
+    font-size: large;
+}
+main {
+    padding-left: 20px;
+    flex: 1;
+}
+nav ul {
+    list-style: none; /* removes bullet points*/
+    padding: 30px;   /*moves to the right*/
+    margin: 0;
+}
+nav a {
+    text-decoration: none; /*removes underline */
+    color: black; 
+}
+nav a:hover {
+    color: gray; /* Changes to gray when hovered to let users know that they are clickable*/
+}
+nav li {
+    margin-bottom: 15px; /* Vertical spacing between the list items*/
+}
+main h3{
+   font-size: x-large;
+}
+#chooseDateSchedule {
+    display: none;
+}
+#task {
+    width: 500px;     
+}
+main form {
+    margin-left: 50px;
+    margin-top: 50px; /* Adds a nice gap between the heading and the form */
+}
+main form input, main form button{
+   padding: 8px 30px;
+}

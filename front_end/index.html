@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>To-Do</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <div id="heading">
+                <h1>To-Do</h1>
+            </div>
+            <form id="searchbar">
+                <input type="search" name="q" placeholder="Search Tasks..." />
+                <input type="submit" value="Search" />
+            </form>
+        </header>
+        <div id="below">
+            <nav>
+                <ul>
+                    <li><a href="#">Today</a></li>
+                    <li><a href="#">Tomorrow</a></li>
+                    <li><a href="#">Schedule Task</a></li>
+                </ul>
+            </nav>
+            <main>
+                <h3>Today</h3>
+                <div id="chooseDateSchedule">
+                    <label for="chooseDate">Schedule task</label>
+                    <input type="date" name="date" id="chooseDate" />
+                </div>
+                <form action="" method="">
+                    <input type="text" name="task" id="task" required placeholder="Add task..."/>
+                    <button>Add task</button>
+                </form>
+                <div id="tasklist">
+                    <ul>
+                    </ul>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>
