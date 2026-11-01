@@ -5,8 +5,6 @@ body{
 header{
    /* background-color: hsl(120, 100%, 75%); */
    background-color: hsl(204, 43%, 83%);
-}
-header{
    display: flex;
    align-items: center;
    padding:5px;
@@ -55,7 +53,8 @@ main h3{
     display: none;
 }
 #task {
-    width: 500px;     
+    width: 250px;
+    max-width: 100%;    
 }
 main form {
     margin-left: 50px;
@@ -63,4 +62,9 @@ main form {
 }
 main form input, main form button{
    padding: 8px 30px;
+}
+button,
+input[type="submit"]{
+    cursor: pointer;
+    border-radius: 10px;
 }

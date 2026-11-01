@@ -2,8 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>To-Do</title>
         <link rel="stylesheet" href="style.css">
+        <script defer src="script.js"></script>
     </head>
     <body>
         <header>
@@ -18,23 +20,23 @@
         <div id="below">
             <nav>
                 <ul>
-                    <li><a href="#">Today</a></li>
-                    <li><a href="#">Tomorrow</a></li>
-                    <li><a href="#">Schedule Task</a></li>
+                    <li><a href="#" id="today">Today</a></li>
+                    <li><a href="#" id="tomorrow">Tomorrow</a></li>
+                    <li><a href="#" id="schedule">Schedule Task</a></li>
                 </ul>
             </nav>
             <main>
-                <h3>Today</h3>
+                <h3 id="dateToShow">Today</h3>
                 <div id="chooseDateSchedule">
                     <label for="chooseDate">Schedule task</label>
                     <input type="date" name="date" id="chooseDate" />
                 </div>
-                <form action="" method="">
+                <form action="" method="" id="taskform">
                     <input type="text" name="task" id="task" required placeholder="Add task..."/>
                     <button>Add task</button>
                 </form>
                 <div id="tasklist">
-                    <ul>
+                    <ul id="taskItems">
                     </ul>
                 </div>
             </main>
