@@ -48,16 +48,14 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 setup_cors(app)
 
-# Serve frontend static files
 frontend_path = os.path.join(os.path.dirname(__file__), "..", "front_end")
-app.mount("/", StaticFiles(directory=frontend_path), name="static")
 
+# '/' route MUST come before the mount
 @app.get("/")
 def read_index():
     return FileResponse(os.path.join(frontend_path, "index.html"))
 
 # EndPoints
-
 @app.get("/tasks")
 def read_tasks(session: SessionDep) -> list[Task]:
     tasks = session.exec(select(Task)).all()
@@ -98,3 +96,6 @@ async def delete_task(id: int, session: SessionDep):
         raise HTTPException(status_code=404)
     session.delete(data)
     session.commit()
+
+# Mount LAST so it doesn't intercept API routes
+app.mount("/", StaticFiles(directory=frontend_path), name="static")
