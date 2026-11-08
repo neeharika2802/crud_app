@@ -15,6 +15,16 @@ let isSearching=false;
 
 let nextId = 1;
 
+const API_URL = "http://127.0.0.1:8000";
+
+async function loadTasks() {
+    const response = await fetch(`${API_URL}/tasks`);
+    const data = await response.json();
+
+    tasks.push(...data);
+    renderTasks();
+}
+
 function showNormalView() {
     document.querySelector("#taskform").style.display = "block";
 }
@@ -53,8 +63,19 @@ function createTaskElement(task){ //creates <li>,chrckbox,title,edit button,dele
     list.appendChild(listItem);
 
     // Mark task as completed or unfinished
-    checkBox.addEventListener("change", () => {
-        task.is_completed = checkBox.checked;
+    checkBox.addEventListener("change", async () => {
+        const response = await fetch(`${API_URL}/tasks/${task.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                is_completed: checkBox.checked
+            })
+        });
+
+        const updatedTask = await response.json();
+        task.is_completed = updatedTask.is_completed;
         if(task.is_completed){
             listText.style.textDecoration="line-through";
         }
@@ -64,7 +85,10 @@ function createTaskElement(task){ //creates <li>,chrckbox,title,edit button,dele
     });
 
     // Delete task
-    listBtn_delete.addEventListener("click", () => {
+    listBtn_delete.addEventListener("click", async () => {
+        const response = await fetch(`${API_URL}/tasks/${task.id}`, {
+            method: "DELETE"
+        });
         const taskIndex = tasks.findIndex((item) => item.id === task.id);
 
         if (taskIndex !== -1) {
@@ -75,11 +99,23 @@ function createTaskElement(task){ //creates <li>,chrckbox,title,edit button,dele
     });
 
     // Edit task
-    listBtn_edit.addEventListener("click", () => {
+    listBtn_edit.addEventListener("click", async () => {
         const edit_task = prompt("Edit task...", task.title);
 
         if (edit_task !== null && edit_task.trim() !== "") {
-            task.title = edit_task;
+            const response = await fetch(`${API_URL}/tasks/${task.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    title: edit_task
+                })
+            });
+
+            const updatedTask = await response.json();
+
+            task.title = updatedTask.title;
             listText.textContent = task.title;
         }
     });
@@ -94,7 +130,7 @@ function renderTasks(){
     }
 }
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const myItem = input.value;
@@ -105,17 +141,20 @@ form.addEventListener("submit", (event) => {
     else if (myItem.trim() !== "") {
 
         // Create a task object
-        const task = {
-            id: nextId,
-            title: myItem,
-            date: currentDate,
-            is_completed: false
-        };
+        const response = await fetch(`${API_URL}/tasks`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: myItem,
+                date: currentDate,
+                is_completed: false
+            })
+        });
 
-        nextId++;
-
-        // Store the task object in the array
-        tasks.push(task);
+        const newTask = await response.json();
+        tasks.push(newTask);
 
         input.value = "";
         renderTasks();
@@ -127,6 +166,8 @@ form.addEventListener("submit", (event) => {
 
 showNormalView();
 dateToShow.textContent=currentDate; //by default show today's date
+
+loadTasks(); //Load saved tasks when the page opens
 todaylink.addEventListener("click",(event)=>{
     event.preventDefault();
     showNormalView();
