@@ -50,7 +50,7 @@ setup_cors(app)
 
 # Serve frontend static files
 frontend_path = os.path.join(os.path.dirname(__file__), "..", "front_end")
-app.mount("/static", StaticFiles(directory=frontend_path), name="static")
+app.mount("/", StaticFiles(directory=frontend_path), name="static")
 
 @app.get("/")
 def read_index():
