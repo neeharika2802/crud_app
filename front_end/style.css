@@ -68,3 +68,28 @@ input[type="submit"]{
     cursor: pointer;
     border-radius: 10px;
 }
+
+/* Spacing between tasks */
+#tasklist li {
+    margin-bottom: 15px;
+}
+
+/* Unchecked checkbox */
+#tasklist input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    accent-color: #647da5;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+/* Edit and Delete buttons */
+#tasklist button {
+    padding: 5px 12px;
+    margin-left: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
