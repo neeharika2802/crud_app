@@ -23,6 +23,7 @@ async function loadTasks() {
 
     tasks.push(...data);
     renderTasks();
+    document.getElementById("loader").style.display = "none";
 }
 
 function showNormalView() {
@@ -221,4 +222,3 @@ search.addEventListener("submit",(event)=>{
     }
     isSearching=false;
 });
-
